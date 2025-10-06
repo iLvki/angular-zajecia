@@ -1,59 +1,79 @@
-# Users
+# Co zostało zrobione
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.16.
+### 06.10.2025
 
-## Development server
+### 1. Instalacja @angular/material
 
-To start a local development server, run:
-
-```bash
-ng serve
+```
+npm i -g @angular/material
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+#
 
-## Code scaffolding
+### 2. Dodanie folderów `enum` oraz `interface` do `app`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+```
+/src/app/enum/role.enum.ts:
 
-```bash
-ng generate component component-name
+export enum RoleEnum {
+  user = 'User',
+  admin = 'Admin',
+}
+
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+#
 
-```bash
-ng generate --help
+```
+/src/app/interface/user.interface.ts:
+
+import { RoleEnum } from '../enum/role.enum'; // auto-uzupełni po wpisaniu RoleEnum
+
+export interface UserInterface {
+  name: string;
+  surname: string;
+  role: RoleEnum;
+  email: string;
+}
 ```
 
-## Building
+#
 
-To build the project run:
+### 3. Poprawa tablicy `users` w `u1.component.ts`, żeby role działały z RoleEnum (zaznaczyłem pustym komentarzem)
 
-```bash
-ng build
+```
+const users: UserInterface[] = [
+  {
+    name: 'Jacek',
+    surname: 'Mąciwór',
+    role: RoleEnum.admin, //
+    email: 'jmaciwor@gmail.com',
+  },
+  {
+    name: 'Ania',
+    surname: 'Wilczydół',
+    role: RoleEnum.user, //
+    email: 'a.wilczydol@a.b',
+  },
+  {
+    name: 'Marek',
+    surname: 'Krzywy',
+    role: RoleEnum.user, //
+    email: 'mkrzywy@pol.pl',
+  },
+];
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## !!! Przed wykonaniem kroku czwartego, dodaj do `imports` te moduły:
 
-## Running unit tests
+- `MatTableModule` - potrzebne dla tabeli
+- `MatFormField` - potrzebne dla późniejszego filtrowania
+- `MatInputModule` - potrzebne dla późniejszego filtrowania
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+#
 
-```bash
-ng test
-```
+### 4. Wstawienie do pliku `u1.component.html` tabeli (wzoru) z [tej strony](https://v19.material.angular.dev/components/table/overview)
 
-## Running end-to-end tests
+#
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 5. Dodanie filtrowania z [tej strony](https://v19.material.angular.dev/components/table/examples) przed tabelą w pliku `u1.component.html`
