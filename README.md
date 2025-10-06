@@ -77,3 +77,17 @@ const users: UserInterface[] = [
 #
 
 ### 5. Dodanie filtrowania z [tej strony](https://v19.material.angular.dev/components/table/examples) przed tabelą w pliku `u1.component.html`
+
+### 6. Dodanie odpowiednich linii do kodu `u1.component.ts`, żeby filtrowanie działało
+
+```
+export class U1Component {
+  displayedColumns: string[] = ['name', 'surname', 'role', 'email'];
+  dataSource = new MatTableDataSource(users);
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+}
+```
